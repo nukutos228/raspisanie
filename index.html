@@ -1,0 +1,1771 @@
+
+<Без темы>
+Никита Шанин
+Сегодня, 16:23
+Кому:вам
+<!DOCTYPE html> <html lang="ru">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<meta name="theme-color" content="#070d20">  
+<meta name="description" content="РАСПИСАНИЕ — школьный портал для просмотра расписания уроков.">  
+<title>РАСПИСАНИЕ — Твоя школа, твой ритм</title> <style>  
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');  
+  
+:root {  
+  --bg:#070d20;  
+  --panel:#0e1933;  
+  --panel2:#14264b;  
+  --border:rgba(105,150,255,.2);  
+  --blue:#13b9ff;  
+  --purple:#9652ff;  
+  --text:#f5f7ff;  
+  --muted:#9aafd5;  
+  --green:#16e6a0;  
+  --warning:#ffc76b;  
+}  
+  
+* {  
+  box-sizing:border-box;  
+  margin:0;  
+  padding:0;  
+}  
+  
+html {  
+  scroll-behavior:smooth;  
+}  
+  
+body {  
+  min-height:100vh;  
+  color:var(--text);  
+  font-family:Manrope,Arial,sans-serif;  
+  background:  
+    radial-gradient(ellipse at 10% 0%,rgba(0,107,255,.16),transparent 35%),  
+    radial-gradient(ellipse at 95% 15%,rgba(135,49,255,.12),transparent 32%),  
+    var(--bg);  
+}  
+  
+button,input {  
+  font:inherit;  
+}  
+  
+button {  
+  color:inherit;  
+}  
+  
+button:focus-visible,  
+input:focus-visible {  
+  outline:2px solid var(--blue);  
+  outline-offset:3px;  
+}  
+  
+.container {  
+  width:min(1440px,100%);  
+  margin:auto;  
+  padding:0 28px;  
+}  
+  
+/* HEADER */  
+  
+header {  
+  min-height:100px;  
+  display:flex;  
+  align-items:center;  
+  justify-content:space-between;  
+  gap:20px;  
+  border-bottom:1px solid var(--border);  
+  position:relative;  
+  z-index:30;  
+}  
+  
+.brand {  
+  display:flex;  
+  align-items:center;  
+  gap:14px;  
+  flex-shrink:0;  
+}  
+  
+.logo {  
+  width:57px;  
+  height:57px;  
+  border-radius:17px;  
+  display:grid;  
+  place-items:center;  
+  font-size:27px;  
+  background:linear-gradient(135deg,#087cff,#9d48ff);  
+  box-shadow:0 0 25px rgba(43,123,255,.4);  
+}  
+  
+.brand-title {  
+  font-size:22px;  
+  font-weight:800;  
+  letter-spacing:1px;  
+}  
+  
+.brand-subtitle {  
+  color:#9eb8e9;  
+  font-size:10px;  
+  letter-spacing:1.4px;  
+  margin-top:3px;  
+}  
+  
+.nav {  
+  display:flex;  
+  align-items:center;  
+  gap:7px;  
+}  
+  
+.nav button {  
+  background:transparent;  
+  border:1px solid transparent;  
+  border-radius:12px;  
+  padding:11px 15px;  
+  color:#b5c6e9;  
+  cursor:pointer;  
+  transition:.2s;  
+}  
+  
+.nav button:hover,  
+.nav button.active {  
+  color:white;  
+  border-color:rgba(35,169,255,.5);  
+  background:rgba(24,105,255,.16);  
+}  
+  
+.header-right {  
+  display:flex;  
+  align-items:center;  
+  gap:12px;  
+  flex-shrink:0;  
+}  
+  
+.status {  
+  display:flex;  
+  align-items:center;  
+  gap:8px;  
+  border:1px solid var(--border);  
+  border-radius:30px;  
+  padding:9px 13px;  
+  color:#c8d6f3;  
+  font-size:11px;  
+}  
+  
+.dot {  
+  width:8px;  
+  height:8px;  
+  border-radius:50%;  
+  background:var(--green);  
+  box-shadow:0 0 10px var(--green);  
+}  
+  
+.menu-toggle {  
+  display:none;  
+  background:var(--panel2);  
+  border:1px solid var(--border);  
+  border-radius:10px;  
+  padding:9px 12px;  
+  cursor:pointer;  
+  font-size:19px;  
+  min-width:43px;  
+  min-height:43px;  
+}  
+  
+/* HERO */  
+  
+.hero {  
+  margin:27px 0 22px;  
+  min-height:215px;  
+  border-radius:23px;  
+  overflow:hidden;  
+  position:relative;  
+  display:flex;  
+  align-items:center;  
+  padding:35px 42px;  
+  border:1px solid rgba(51,128,255,.5);  
+  background:  
+    radial-gradient(circle at 82% 50%,rgba(93,50,255,.3),transparent 34%),  
+    linear-gradient(110deg,#0b1b43,#10164a 65%,#19103e);  
+}  
+  
+.hero-content {  
+  position:relative;  
+  z-index:2;  
+  max-width:680px;  
+}  
+  
+.hero-label {  
+  color:#67caff;  
+  font-size:11px;  
+  font-weight:800;  
+  letter-spacing:2px;  
+}  
+  
+.hero h1 {  
+  font-size:clamp(29px,4vw,46px);  
+  line-height:1.2;  
+  margin:12px 0;  
+  font-weight:800;  
+}  
+  
+.gradient {  
+  background:linear-gradient(90deg,#14d5ff,#a66aff);  
+  -webkit-background-clip:text;  
+  background-clip:text;  
+  color:transparent;  
+}  
+  
+.hero p {  
+  color:#c2d1f0;  
+  font-size:13px;  
+  line-height:1.7;  
+}  
+  
+.hero-art {  
+  position:absolute;  
+  right:65px;  
+  top:50%;  
+  transform:translateY(-50%);  
+  font-size:110px;  
+  filter:drop-shadow(0 0 25px #417dff);  
+  opacity:.85;  
+  pointer-events:none;  
+}  
+  
+/* LAYOUT */  
+  
+.main-layout {  
+  display:grid;  
+  grid-template-columns:290px minmax(0,1fr);  
+  gap:20px;  
+  align-items:start;  
+}  
+  
+.panel {  
+  min-width:0;  
+  background:linear-gradient(145deg,rgba(16,31,65,.97),rgba(10,20,43,.97));  
+  border:1px solid var(--border);  
+  border-radius:20px;  
+  padding:21px;  
+  box-shadow:0 12px 35px rgba(0,0,0,.12);  
+}  
+  
+.panel-title {  
+  display:flex;  
+  align-items:center;  
+  gap:11px;  
+  font-size:17px;  
+  font-weight:800;  
+  margin-bottom:19px;  
+}  
+  
+/* SEARCH AND CLASSES */  
+  
+.search-box {  
+  position:relative;  
+  margin-bottom:16px;  
+}  
+  
+.search-symbol {  
+  position:absolute;  
+  left:14px;  
+  top:50%;  
+  transform:translateY(-50%);  
+  color:#7d9bcf;  
+  font-size:18px;  
+  pointer-events:none;  
+}  
+  
+.search {  
+  width:100%;  
+  padding:13px 13px 13px 42px;  
+  border:1px solid var(--border);  
+  border-radius:12px;  
+  outline:none;  
+  color:white;  
+  background:#09152e;  
+  font-size:13px;  
+}  
+  
+.search::placeholder {  
+  color:#7890bb;  
+}  
+  
+.search:focus {  
+  border-color:var(--blue);  
+}  
+  
+.class-list {  
+  display:grid;  
+  grid-template-columns:repeat(3,minmax(0,1fr));  
+  gap:9px;  
+}  
+  
+.class-btn {  
+  min-height:48px;  
+  border:1px solid rgba(83,128,224,.27);  
+  background:linear-gradient(145deg,#14264d,#0d1b39);  
+  border-radius:12px;  
+  color:#d5e1ff;  
+  font-weight:800;  
+  cursor:pointer;  
+  transition:.2s;  
+}  
+  
+.class-btn:hover {  
+  border-color:#3b9fff;  
+  transform:translateY(-2px);  
+}  
+  
+.class-btn.active {  
+  color:white;  
+  border-color:#35c4ff;  
+  background:linear-gradient(135deg,#087fff,#8047f4);  
+  box-shadow:0 0 18px rgba(39,139,255,.3);  
+}  
+  
+.empty-classes {  
+  grid-column:1/-1;  
+  color:var(--muted);  
+  font-size:12px;  
+  padding:12px 0;  
+}  
+  
+.selected-info {  
+  margin-top:19px;  
+  padding:14px;  
+  border-radius:13px;  
+  background:rgba(5,14,34,.7);  
+  border:1px solid var(--border);  
+}  
+  
+.small-label {  
+  font-size:10px;  
+  letter-spacing:1.3px;  
+  color:#8ca5d2;  
+}  
+  
+.selected-value {  
+  margin-top:6px;  
+  font-weight:800;  
+  font-size:18px;  
+}  
+  
+/* SCHEDULE */  
+  
+.schedule-heading {  
+  display:flex;  
+  justify-content:space-between;  
+  align-items:center;  
+  gap:15px;  
+  margin-bottom:20px;  
+}  
+  
+.schedule-heading h2 {  
+  font-size:21px;  
+}  
+  
+.schedule-heading p {  
+  color:var(--muted);  
+  font-size:12px;  
+  margin-top:5px;  
+}  
+  
+.demo-status {  
+  color:#ffe0a6;  
+  background:rgba(255,190,80,.09);  
+  border:1px solid rgba(255,190,80,.3);  
+  padding:8px 11px;  
+  border-radius:20px;  
+  font-size:10px;  
+  white-space:nowrap;  
+  flex-shrink:0;  
+}  
+  
+/* DAYS */  
+  
+.week {  
+  display:flex;  
+  gap:9px;  
+  overflow-x:auto;  
+  padding:2px 2px 9px;  
+  scrollbar-width:thin;  
+}  
+  
+.day-btn {  
+  flex:1;  
+  min-width:90px;  
+  border:1px solid var(--border);  
+  background:#101e3d;  
+  color:#c6d5f4;  
+  border-radius:12px;  
+  padding:12px 7px;  
+  cursor:pointer;  
+  transition:.2s;  
+}  
+  
+.day-btn strong {  
+  display:block;  
+  font-size:12px;  
+}  
+  
+.day-btn small {  
+  display:block;  
+  margin-top:5px;  
+  font-size:10px;  
+  color:#8da6d3;  
+}  
+  
+.day-btn:hover {  
+  border-color:#428fff;  
+}  
+  
+.day-btn.active {  
+  color:white;  
+  border-color:#38baff;  
+  background:linear-gradient(125deg,#087eff,#8149ed);  
+  box-shadow:0 0 18px rgba(41,131,255,.3);  
+}  
+  
+.day-btn.active small {  
+  color:#e0eaff;  
+}  
+  
+/* DESKTOP TABLE */  
+  
+.table-wrap {  
+  margin-top:18px;  
+  overflow-x:auto;  
+  max-width:100%;  
+}  
+  
+.lesson-table {  
+  width:100%;  
+  min-width:550px;  
+  border-collapse:separate;  
+  border-spacing:0 5px;  
+  text-align:left;  
+}  
+  
+.lesson-table th {  
+  padding:12px 10px;  
+  color:#9bb5e4;  
+  font-size:11px;  
+  font-weight:600;  
+}  
+  
+.lesson-table td {  
+  padding:13px 10px;  
+  background:#14264c;  
+  border-top:1px solid rgba(105,151,255,.08);  
+  border-bottom:1px solid rgba(105,151,255,.08);  
+  font-size:12px;  
+}  
+  
+.lesson-table tbody tr:hover td {  
+  background:#1b3567;  
+}  
+  
+.lesson-table td:first-child {  
+  border-radius:11px 0 0 11px;  
+  width:45px;  
+  color:#7fcaff;  
+  font-weight:800;  
+}  
+  
+.lesson-table td:last-child {  
+  border-radius:0 11px 11px 0;  
+}  
+  
+.lesson-name {  
+  font-weight:800;  
+  color:white;  
+}  
+  
+.lesson-time {  
+  white-space:nowrap;  
+  color:#c1d2f3;  
+}  
+  
+.lesson-room {  
+  color:#b4c9ef;  
+}  
+  
+.teacher {  
+  color:#9eafd1;  
+  white-space:nowrap;  
+}  
+  
+.subject-icon {  
+  display:inline-block;  
+  margin-right:7px;  
+}  
+  
+/* MOBILE LESSON CARDS */  
+  
+.mobile-lessons {  
+  display:none;  
+  margin-top:17px;  
+  gap:9px;  
+}  
+  
+.mobile-lesson {  
+  display:grid;  
+  grid-template-columns:42px minmax(0,1fr);  
+  gap:11px;  
+  align-items:center;  
+  padding:13px;  
+  border-radius:13px;  
+  background:#14264c;  
+  border:1px solid rgba(105,151,255,.12);  
+}  
+  
+.mobile-number {  
+  width:39px;  
+  height:39px;  
+  border-radius:11px;  
+  display:grid;  
+  place-items:center;  
+  background:#203d70;  
+  color:#8bd4ff;  
+  font-weight:800;  
+}  
+  
+.mobile-subject {  
+  font-size:13px;  
+  font-weight:800;  
+  overflow-wrap:anywhere;  
+}  
+  
+.mobile-time {  
+  font-size:11px;  
+  color:#b8c9e9;  
+  margin-top:4px;  
+}  
+  
+.mobile-details {  
+  grid-column:2;  
+  color:#9eafd1;  
+  font-size:10px;  
+  margin-top:-5px;  
+  overflow-wrap:anywhere;  
+}  
+  
+.no-lessons {  
+  text-align:center;  
+  padding:35px 15px;  
+  color:var(--muted);  
+  font-size:13px;  
+  line-height:1.7;  
+}  
+  
+/* NOTICE AND STATS */  
+  
+.notice {  
+  display:flex;  
+  gap:13px;  
+  padding:15px;  
+  margin-top:17px;  
+  border-radius:13px;  
+  background:rgba(88,81,255,.09);  
+  border:1px solid rgba(123,106,255,.2);  
+}  
+  
+.notice-icon {  
+  font-size:22px;  
+  flex-shrink:0;  
+}  
+  
+.notice strong {  
+  font-size:12px;  
+}  
+  
+.notice p {  
+  margin-top:5px;  
+  color:#9eafd0;  
+  font-size:11px;  
+  line-height:1.6;  
+}  
+  
+.stats {  
+  display:grid;  
+  grid-template-columns:repeat(3,minmax(0,1fr));  
+  gap:15px;  
+  margin-top:19px;  
+}  
+  
+.stat-card {  
+  display:flex;  
+  align-items:center;  
+  gap:13px;  
+  padding:17px;  
+  min-height:88px;  
+  border-radius:16px;  
+  background:linear-gradient(130deg,#102b60,#111c42);  
+  border:1px solid rgba(48,133,255,.35);  
+  min-width:0;  
+}  
+  
+.stat-icon {  
+  font-size:26px;  
+  flex-shrink:0;  
+}  
+  
+.stat-card strong {  
+  display:block;  
+  font-size:14px;  
+  overflow-wrap:anywhere;  
+}  
+  
+.stat-card span {  
+  display:block;  
+  margin-top:4px;  
+  color:#9db3dd;  
+  font-size:10px;  
+}  
+  
+footer {  
+  display:flex;  
+  align-items:center;  
+  justify-content:space-between;  
+  gap:15px;  
+  margin-top:32px;  
+  padding:21px 0;  
+  border-top:1px solid var(--border);  
+  color:#8096bd;  
+  font-size:11px;  
+}  
+  
+/* DIALOGS */  
+  
+dialog {  
+  width:min(440px,calc(100% - 30px));  
+  max-height:calc(100vh - 30px);  
+  max-height:calc(100dvh - 30px);  
+  margin:auto;  
+  padding:0;  
+  border:1px solid var(--border);  
+  border-radius:19px;  
+  background:#101d3c;  
+  color:var(--text);  
+  box-shadow:0 20px 80px #000a;  
+  overflow-y:auto;  
+}  
+  
+dialog::backdrop {  
+  background:rgba(0,0,0,.72);  
+  backdrop-filter:blur(5px);  
+}  
+  
+.dialog-content {  
+  padding:24px;  
+}  
+  
+.dialog-content h2 {  
+  font-size:20px;  
+  margin-bottom:12px;  
+}  
+  
+.dialog-content p {  
+  font-size:13px;  
+  line-height:1.7;  
+  color:#b3c5e8;  
+  overflow-wrap:anywhere;  
+}  
+  
+.dialog-close {  
+  margin-top:20px;  
+  padding:10px 17px;  
+  border:0;  
+  border-radius:10px;  
+  background:linear-gradient(120deg,#087fff,#8047f4);  
+  color:white;  
+  font-weight:700;  
+  cursor:pointer;  
+}  
+  
+/* TABLET */  
+  
+@media(max-width:1000px) {  
+  .main-layout {  
+    grid-template-columns:250px minmax(0,1fr);  
+  }  
+  
+  .nav button {  
+    padding:10px;  
+    font-size:12px;  
+  }  
+  
+  .hero-art {  
+    right:25px;  
+    opacity:.5;  
+  }  
+}  
+  
+/* MOBILE */  
+  
+@media(max-width:760px) {  
+  .container {  
+    padding:0 13px;  
+  }  
+  
+  header {  
+    min-height:80px;  
+  }  
+  
+  .logo {  
+    width:46px;  
+    height:46px;  
+    font-size:22px;  
+  }  
+  
+  .brand {  
+    gap:9px;  
+  }  
+  
+  .brand-title {  
+    font-size:16px;  
+  }  
+  
+  .brand-subtitle {  
+    font-size:8px;  
+    letter-spacing:1px;  
+  }  
+  
+  .header-right {  
+    margin-left:auto;  
+  }  
+  
+  .status {  
+    display:none;  
+  }  
+  
+  .menu-toggle {  
+    display:block;  
+  }  
+  
+  .nav {  
+    display:none;  
+    position:absolute;  
+    top:calc(100% + 8px);  
+    left:0;  
+    right:0;  
+    z-index:40;  
+    padding:10px;  
+    border:1px solid var(--border);  
+    border-radius:14px;  
+    background:#101d3c;  
+    box-shadow:0 15px 35px rgba(0,0,0,.4);  
+    flex-direction:column;  
+    align-items:stretch;  
+  }  
+  
+  .nav.open {  
+    display:flex;  
+  }  
+  
+  .nav button {  
+    text-align:left;  
+    padding:13px;  
+    width:100%;  
+  }  
+  
+  .hero {  
+    min-height:180px;  
+    padding:25px 20px;  
+    margin-top:19px;  
+  }  
+  
+  .hero-content {  
+    max-width:100%;  
+    padding-right:35px;  
+  }  
+  
+  .hero h1 {  
+    font-size:27px;  
+  }  
+  
+  .hero p {  
+    font-size:12px;  
+    max-width:260px;  
+  }  
+  
+  .hero-art {  
+    font-size:65px;  
+    right:10px;  
+    opacity:.22;  
+  }  
+  
+  .main-layout {  
+    grid-template-columns:1fr;  
+  }  
+  
+  .panel {  
+    padding:16px;  
+  }  
+  
+  .class-list {  
+    grid-template-columns:repeat(4,minmax(0,1fr));  
+  }  
+  
+  .schedule-heading {  
+    align-items:flex-start;  
+    flex-wrap:wrap;  
+  }  
+  
+  .schedule-heading h2 {  
+    font-size:18px;  
+  }  
+  
+  .table-wrap {  
+    display:none;  
+  }  
+  
+  .mobile-lessons {  
+    display:grid;  
+  }  
+  
+  .stats {  
+    grid-template-columns:1fr;  
+    gap:9px;  
+  }  
+  
+  .stat-card {  
+    min-height:67px;  
+  }  
+  
+  footer {  
+    flex-direction:column;  
+    align-items:flex-start;  
+    line-height:1.6;  
+  }  
+}  
+  
+/* SMALL PHONES */  
+  
+@media(max-width:420px) {  
+  .container {  
+    padding:0 10px;  
+  }  
+  
+  .brand-title {  
+    font-size:14px;  
+  }  
+  
+  .brand-subtitle {  
+    font-size:7px;  
+    letter-spacing:.8px;  
+  }  
+  
+  .header-right {  
+    gap:6px;  
+  }  
+  
+  .hero {  
+    padding:22px 15px;  
+  }  
+  
+  .hero h1 {  
+    font-size:24px;  
+  }  
+  
+  .hero-content {  
+    padding-right:15px;  
+  }  
+  
+  .schedule-heading {  
+    gap:9px;  
+  }  
+  
+  .demo-status {  
+    font-size:9px;  
+    padding:7px;  
+  }  
+  
+  .class-list {  
+    grid-template-columns:repeat(3,minmax(0,1fr));  
+  }  
+}  
+  
+/* VERY SMALL PHONES */  
+  
+@media(max-width:340px) {  
+  .brand-title {  
+    font-size:12px;  
+  }  
+  
+  .brand-subtitle {  
+    font-size:6px;  
+  }  
+  
+  .logo {  
+    width:39px;  
+    height:39px;  
+    border-radius:12px;  
+    font-size:19px;  
+  }  
+  
+  .hero h1 {  
+    font-size:21px;  
+  }  
+  
+  .class-btn {  
+    min-height:42px;  
+    font-size:12px;  
+  }  
+  
+  .panel {  
+    padding:12px;  
+  }  
+}  
+  
+/* LOW HEIGHT SCREENS */  
+  
+@media(max-height:650px) {  
+  header {  
+    min-height:68px;  
+  }  
+  
+  .hero {  
+    min-height:145px;  
+    margin-top:16px;  
+    margin-bottom:15px;  
+    padding:20px 25px;  
+  }  
+  
+  .hero h1 {  
+    margin:7px 0;  
+    font-size:clamp(24px,3vw,34px);  
+  }  
+  
+  .panel {  
+    padding:15px;  
+  }  
+  
+  .panel-title {  
+    margin-bottom:12px;  
+  }  
+  
+  .schedule-heading {  
+    margin-bottom:12px;  
+  }  
+  
+  .week {  
+    gap:6px;  
+  }  
+  
+  .day-btn {  
+    padding:9px 6px;  
+  }  
+  
+  .notice {  
+    margin-top:12px;  
+    padding:11px;  
+  }  
+  
+  .stats {  
+    margin-top:13px;  
+  }  
+  
+  footer {  
+    margin-top:18px;  
+    padding:14px 0;  
+  }  
+  
+  .dialog-content {  
+    padding:18px;  
+  }  
+}  
+  
+@media(max-height:500px) {  
+  .hero {  
+    min-height:115px;  
+    padding:15px 20px;  
+  }  
+  
+  .hero h1 {  
+    font-size:23px;  
+    margin:5px 0;  
+  }  
+  
+  .hero p {  
+    font-size:11px;  
+  }  
+  
+  .hero-art {  
+    font-size:55px;  
+  }  
+  
+  .panel {  
+    padding:12px;  
+  }  
+  
+  .dialog-content {  
+    padding:14px;  
+  }  
+  
+  .dialog-content h2 {  
+    font-size:18px;  
+    margin-bottom:8px;  
+  }  
+  
+  .dialog-close {  
+    margin-top:12px;  
+  }  
+}  
+  
+/* REDUCED MOTION */  
+  
+@media(prefers-reduced-motion:reduce) {  
+  *,  
+  *::before,  
+  *::after {  
+    scroll-behavior:auto !important;  
+    animation-duration:.01ms !important;  
+    animation-iteration-count:1 !important;  
+    transition-duration:.01ms !important;  
+  }  
+}  
+</style> </head> <body>  
+<div class="container"> <header>  
+  <div class="brand">  
+    <div class="logo" aria-hidden="true">🎓</div>  
+    <div>  
+      <div class="brand-title">РАСПИСАНИЕ</div>  
+      <div class="brand-subtitle">ТВОЯ ШКОЛА · ТВОЙ РИТМ</div>  
+    </div>  
+  </div> <nav class="nav" id="navigation" aria-label="Главная навигация">  
+    <button class="active" type="button" data-section="home">⌂ Главная</button>  
+    <button type="button" data-section="about">ⓘ О проекте</button>  
+    <button type="button" data-section="help">✦ Помощь</button>  
+  </nav> <div class="header-right">  
+    <div class="status">  
+      <span class="dot"></span>  
+      Интерфейс активен  
+    </div> <button  
+  class="menu-toggle"  
+  id="menuToggle"  
+  type="button"  
+  aria-label="Открыть меню"  
+  aria-controls="navigation"  
+  aria-expanded="false"  
+>☰</button>
+
+  </div>  
+</header> <section class="hero" id="home">  
+  <div class="hero-content">  
+    <div class="hero-label">ЕДИНЫЙ ШКОЛЬНЫЙ ПОРТАЛ</div> <h1>  
+  Успех начинается<br>  
+  <span class="gradient">с хорошего расписания!</span>  
+</h1>  
+
+<p>Выбирай свой класс, следи за уроками и планируй учебный день.</p>
+
+  </div> <div class="hero-art" aria-hidden="true">📚</div>  
+</section> <main class="main-layout"> <aside class="panel">  
+    <h2 class="panel-title">  
+      <span>▰</span>  
+      Выбор класса  
+    </h2> <div class="search-box">  
+  <span class="search-symbol" aria-hidden="true">⌕</span>  
+
+  <input  
+    type="search"  
+    class="search"  
+    id="classSearch"  
+    placeholder="Поиск класса..."  
+    autocomplete="off"  
+    aria-label="Поиск класса"  
+  >  
+</div>  
+
+<div class="class-list" id="classList"></div>  
+
+<div class="selected-info">  
+  <div class="small-label">ВЫБРАННЫЙ КЛАСС</div>  
+  <div class="selected-value" id="selectedClass">5Д</div>  
+</div>
+
+  </aside> <section class="panel" aria-labelledby="scheduleTitle">  
+    <div class="schedule-heading">  
+      <div>  
+        <h2 id="scheduleTitle">▦ Расписание уроков</h2>  
+        <p id="scheduleCaption">Класс 5Д · Понедельник</p>  
+      </div> <div class="demo-status">● ДЕМО-РЕЖИМ</div>  
+</div>  
+
+<div class="week" id="week" aria-label="Дни недели"></div>  
+
+<div class="table-wrap">  
+  <table class="lesson-table">  
+    <thead>  
+      <tr>  
+        <th>№</th>  
+        <th>Время</th>  
+        <th>Предмет</th>  
+        <th>Кабинет</th>  
+        <th>Учитель</th>  
+      </tr>  
+    </thead>  
+
+    <tbody id="lessonBody"></tbody>  
+  </table>  
+</div>  
+
+<div class="mobile-lessons" id="mobileLessons"></div>  
+
+<div class="notice">  
+  <div class="notice-icon">💡</div>  
+
+  <div>  
+    <strong>Информация о расписании</strong>  
+
+    <p id="noticeText">  
+      Сейчас отображаются демонстрационные данные.  
+      Настоящее расписание будет подключено отдельно  
+      из разрешённого источника.  
+    </p>  
+  </div>  
+</div>
+
+  </section>  
+</main> <section class="stats">  
+  <div class="stat-card">  
+    <div class="stat-icon">📅</div>  
+    <div>  
+      <strong id="statClass">5Д</strong>  
+      <span>Выбранный класс</span>  
+    </div>  
+  </div> <div class="stat-card">  
+    <div class="stat-icon">📖</div>  
+    <div>  
+      <strong id="statLessons">6 уроков</strong>  
+      <span id="statLessonsCaption">Сегодня по расписанию</span>  
+    </div>  
+  </div> <div class="stat-card">  
+    <div class="stat-icon">⚡</div>  
+    <div>  
+      <strong>РАСПИСАНИЕ</strong>  
+      <span>Твоя школа — твой ритм</span>  
+    </div>  
+  </div>  
+</section> <footer>  
+  <span>© 2026 <strong>РАСПИСАНИЕ</strong>. Школьный портал.</span>  
+  <span>Учись. Развивайся. Достигай большего.</span>  
+</footer> </div> <dialog id="infoDialog" aria-labelledby="dialogTitle">  
+  <div class="dialog-content">  
+    <h2 id="dialogTitle">О проекте</h2>  
+    <p id="dialogText"></p> <button class="dialog-close" id="dialogClose" type="button">  
+  Закрыть  
+</button>
+
+  </div>  
+</dialog> <script>  
+"use strict";  
+  
+/*  
+ * ДЕМОНСТРАЦИОННЫЕ ДАННЫЕ.  
+ * Реальные классы и расписание подключаются отдельно.  
+ */  
+  
+const classes = [  
+  "1А","1Б","1В",  
+  "2А","2Б","2В",  
+  "3А","3Б","3В",  
+  "4А","4Б","4В",  
+  "5А","5Б","5В","5Г","5Д",  
+  "6А","6Б","6В","6Г",  
+  "7А","7Б","7В",  
+  "8А","8Б","8В",  
+  "9А","9Б",  
+  "10А","10Б","11А"  
+];  
+  
+const days = [  
+  {short:"Пн",full:"Понедельник"},  
+  {short:"Вт",full:"Вторник"},  
+  {short:"Ср",full:"Среда"},  
+  {short:"Чт",full:"Четверг"},  
+  {short:"Пт",full:"Пятница"}  
+];  
+  
+/* Демонстрационное расписание только для 5Д. */  
+  
+const demoSchedule = {  
+  "5Д": [  
+    [  
+      ["08:30–09:15","Математика","204","Иванова Е.В.","∑"],  
+      ["09:25–10:10","Русский язык","112","Петрова Н.А.","📘"],  
+      ["10:20–11:05","История","305","Сидоров А.В.","🏛"],  
+      ["11:25–12:10","Английский язык","208","Кузнецова М.В.","🌐"],  
+      ["12:20–13:05","Биология","310","Смирнова О.П.","🌿"],  
+      ["13:15–14:00","Физкультура","Спортзал","Волков Д.С.","⚽"]  
+    ],  
+    [  
+      ["08:30–09:15","Русский язык","112","Петрова Н.А.","📘"],  
+      ["09:25–10:10","Математика","204","Иванова Е.В.","∑"],  
+      ["10:20–11:05","География","206","Орлова И.С.","🌍"],  
+      ["11:25–12:10","Литература","112","Петрова Н.А.","📖"],  
+      ["12:20–13:05","Информатика","101","Фёдоров А.П.","💻"]  
+    ],  
+    [  
+      ["08:30–09:15","История","305","Сидоров А.В.","🏛"],  
+      ["09:25–10:10","Английский язык","208","Кузнецова М.В.","🌐"],  
+      ["10:20–11:05","Математика","204","Иванова Е.В.","∑"],  
+      ["11:25–12:10","Музыка","105","Лебедева Т.В.","🎵"],  
+      ["12:20–13:05","Технология","109","Макаров И.П.","🔧"]  
+    ],  
+    [  
+      ["08:30–09:15","Биология","310","Смирнова О.П.","🌿"],  
+      ["09:25–10:10","Русский язык","112","Петрова Н.А.","📘"],  
+      ["10:20–11:05","Математика","204","Иванова Е.В.","∑"],  
+      ["11:25–12:10","Физкультура","Спортзал","Волков Д.С.","⚽"]  
+    ],  
+    [  
+      ["08:30–09:15","Литература","112","Петрова Н.А.","📖"],  
+      ["09:25–10:10","География","206","Орлова И.С.","🌍"],  
+      ["10:20–11:05","Английский язык","208","Кузнецова М.В.","🌐"],  
+      ["11:25–12:10","История","305","Сидоров А.В.","🏛"],  
+      ["12:20–13:05","Классный час","204","Иванова Е.В.","⭐"]  
+    ]  
+  ]  
+};  
+  
+/* DOM ELEMENTS */  
+  
+const elements = {  
+  classList:document.getElementById("classList"),  
+  classSearch:document.getElementById("classSearch"),  
+  selectedClass:document.getElementById("selectedClass"),  
+  scheduleCaption:document.getElementById("scheduleCaption"),  
+  lessonBody:document.getElementById("lessonBody"),  
+  mobileLessons:document.getElementById("mobileLessons"),  
+  week:document.getElementById("week"),  
+  statClass:document.getElementById("statClass"),  
+  statLessons:document.getElementById("statLessons"),  
+  statLessonsCaption:document.getElementById("statLessonsCaption"),  
+  noticeText:document.getElementById("noticeText"),  
+  dialog:document.getElementById("infoDialog"),  
+  dialogTitle:document.getElementById("dialogTitle"),  
+  dialogText:document.getElementById("dialogText")  
+};  
+  
+const menuToggle = document.getElementById("menuToggle");  
+const navigation = document.getElementById("navigation");  
+  
+/* STATE */  
+  
+function getSavedClass() {  
+  try {  
+    const saved = localStorage.getItem("raspisanie-selected-class");  
+    return classes.includes(saved) ? saved : "5Д";  
+  } catch {  
+    return "5Д";  
+  }  
+}  
+  
+let selectedClass = getSavedClass();  
+  
+/*  
+ * Возвращает индекс дня недели:  
+ * 0–4 — понедельник–пятница.  
+ * null — суббота или воскресенье.  
+ */  
+  
+function getCurrentDay() {  
+  const weekday = new Date().getDay();  
+  
+  if (weekday >= 1 && weekday <= 5) {  
+    return weekday - 1;  
+  }  
+  
+  return null;  
+}  
+  
+const currentDay = getCurrentDay();  
+  
+// В выходные дни для первого отображения выбираем понедельник.  
+let selectedDay = currentDay !== null ? currentDay : 0;  
+  
+/* STORAGE */  
+  
+function saveSelectedClass() {  
+  try {  
+    localStorage.setItem("raspisanie-selected-class",selectedClass);  
+  } catch {  
+    // Интерфейс продолжает работать без localStorage.  
+  }  
+}  
+  
+/* HELPERS */  
+  
+function createElement(tag,className,text) {  
+  const element = document.createElement(tag);  
+  
+  if (className) {  
+    element.className = className;  
+  }  
+  
+  if (text !== undefined) {  
+    element.textContent = text;  
+  }  
+  
+  return element;  
+}  
+  
+/* CLASS LIST */  
+  
+function renderClasses(filter = "") {  
+  elements.classList.innerHTML = "";  
+  
+  const query = filter.trim().toLowerCase();  
+  
+  // Показываем только классы, подходящие под поисковый запрос.  
+  const filtered = classes.filter(name =>  
+    name.toLowerCase().includes(query)  
+  );  
+  
+  if (filtered.length === 0) {  
+    elements.classList.appendChild(  
+      createElement("div","empty-classes","Класс не найден.")  
+    );  
+    return;  
+  }  
+  
+  filtered.forEach(name => {  
+    const button = createElement(  
+      "button",  
+      "class-btn" + (name === selectedClass ? " active" : ""),  
+      name  
+    );  
+  
+    button.type = "button";  
+  
+    button.setAttribute(  
+      "aria-pressed",  
+      String(name === selectedClass)  
+    );  
+  
+    button.addEventListener("click",() => {  
+      selectedClass = name;  
+  
+      saveSelectedClass();  
+      renderClasses(elements.classSearch.value);  
+      renderSchedule();  
+    });  
+  
+    elements.classList.appendChild(button);  
+  });  
+}  
+  
+/* DAYS */  
+  
+function renderDays() {  
+  elements.week.innerHTML = "";  
+  
+  days.forEach((day,index) => {  
+    const button = createElement(  
+      "button",  
+      "day-btn" + (index === selectedDay ? " active" : "")  
+    );  
+  
+    button.type = "button";  
+  
+    button.setAttribute(  
+      "aria-pressed",  
+      String(index === selectedDay)  
+    );  
+  
+    const strong = createElement("strong","",day.full);  
+    const small = createElement("small","",day.short);  
+  
+    button.append(strong,small);  
+  
+    button.addEventListener("click",() => {  
+      selectedDay = index;  
+      renderDays();  
+      renderSchedule();  
+    });  
+  
+    elements.week.appendChild(button);  
+  });  
+}  
+  
+/* DESKTOP LESSONS */  
+  
+function renderDesktopLessons(lessons) {  
+  elements.lessonBody.innerHTML = "";  
+  
+  lessons.forEach((lesson,index) => {  
+    const row = document.createElement("tr");  
+  
+    const values = [  
+      String(index + 1),  
+      lesson[0],  
+      lesson[1],  
+      lesson[2],  
+      lesson[3]  
+    ];  
+  
+    values.forEach((value,column) => {  
+      const cell = document.createElement("td");  
+  
+      if (column === 1) {  
+        cell.className = "lesson-time";  
+      }  
+  
+      if (column === 2) {  
+        const icon = createElement(  
+          "span",  
+          "subject-icon",  
+          lesson[4]  
+        );  
+  
+        const name = createElement(  
+          "span",  
+          "lesson-name",  
+          value  
+        );  
+  
+        cell.append(icon,name);  
+      } else {  
+        cell.textContent = value;  
+      }  
+  
+      if (column === 3) {  
+        cell.className = "lesson-room";  
+      }  
+  
+      if (column === 4) {  
+        cell.className = "teacher";  
+      }  
+  
+      row.appendChild(cell);  
+    });  
+  
+    elements.lessonBody.appendChild(row);  
+  });  
+}  
+  
+/* MOBILE LESSONS */  
+  
+function renderMobileLessons(lessons) {  
+  elements.mobileLessons.innerHTML = "";  
+  
+  lessons.forEach((lesson,index) => {  
+    const card = createElement("article","mobile-lesson");  
+  
+    const number = createElement(  
+      "div",  
+      "mobile-number",  
+      String(index + 1)  
+    );  
+  
+    const main = document.createElement("div");  
+  
+    const subject = createElement(  
+      "div",  
+      "mobile-subject",  
+      lesson[1]  
+    );  
+  
+    const time = createElement(  
+      "div",  
+      "mobile-time",  
+      lesson[0]  
+    );  
+  
+    const details = createElement(  
+      "div",  
+      "mobile-details",  
+      `Кабинет: ${lesson[2]} · Учитель: ${lesson[3]}`  
+    );  
+  
+    main.append(subject,time);  
+    card.append(number,main,details);  
+  
+    elements.mobileLessons.appendChild(card);  
+  });  
+}  
+  
+/* EMPTY SCHEDULE */  
+  
+function renderEmptySchedule() {  
+  elements.lessonBody.innerHTML = "";  
+  elements.mobileLessons.innerHTML = "";  
+  
+  const message = selectedClass === "5Д"  
+    ? "На этот день пока нет демонстрационных уроков."  
+    : "Для этого класса пока нет подключённых данных расписания.";  
+  
+  const mobileEmpty = createElement(  
+    "div",  
+    "no-lessons",  
+    message  
+  );  
+  
+  elements.mobileLessons.appendChild(mobileEmpty);  
+  
+  const row = document.createElement("tr");  
+  const cell = document.createElement("td");  
+  
+  cell.colSpan = 5;  
+  cell.className = "no-lessons";  
+  cell.textContent = message;  
+  
+  row.appendChild(cell);  
+  elements.lessonBody.appendChild(row);  
+}  
+  
+/* SCHEDULE */  
+  
+function renderSchedule() {  
+  elements.selectedClass.textContent = selectedClass;  
+  elements.statClass.textContent = selectedClass;  
+  
+  elements.scheduleCaption.textContent =  
+    `Класс ${selectedClass} · ${days[selectedDay].full}`;  
+  
+  if (currentDay !== null && selectedDay === currentDay) {  
+    elements.statLessonsCaption.textContent = "Сегодня по расписанию";  
+  } else {  
+    elements.statLessonsCaption.textContent =  
+      `${days[selectedDay].full} по расписанию`;  
+  }  
+  
+  const classSchedule = demoSchedule[selectedClass];  
+  
+  const lessons = classSchedule  
+    ? classSchedule[selectedDay]  
+    : null;  
+  
+  if (!lessons || lessons.length === 0) {  
+    renderEmptySchedule();  
+  
+    elements.statLessons.textContent = "Нет данных";  
+  
+    elements.noticeText.textContent =  
+      "Для выбранного класса или дня нет демонстрационных данных. Это не означает, что в школе нет уроков.";  
+  
+    return;  
+  }  
+  
+  renderDesktopLessons(lessons);  
+  renderMobileLessons(lessons);  
+  
+  elements.statLessons.textContent =  
+    `${lessons.length} уроков`;  
+  
+  elements.noticeText.textContent =  
+    "Показано демонстрационное расписание для примера интерфейса. Оно не является настоящим школьным расписанием.";  
+}  
+  
+/* DIALOGS */  
+  
+let dialogFallbackMode = false;  
+  
+function openInfo(title,text) {  
+  elements.dialogTitle.textContent = title;  
+  elements.dialogText.textContent = text;  
+  
+  if (typeof elements.dialog.showModal === "function") {  
+    dialogFallbackMode = false;  
+  
+    if (!elements.dialog.open) {  
+      elements.dialog.showModal();  
+    }  
+  } else {  
+    dialogFallbackMode = true;  
+    elements.dialog.setAttribute("open","");  
+  }  
+}  
+  
+function closeInfoDialog() {  
+  if (dialogFallbackMode) {  
+    elements.dialog.removeAttribute("open");  
+    return;  
+  }  
+  
+  if (  
+    typeof elements.dialog.close === "function" &&  
+    elements.dialog.open  
+  ) {  
+    elements.dialog.close();  
+  }  
+}  
+  
+document  
+  .getElementById("dialogClose")  
+  .addEventListener("click",closeInfoDialog);  
+  
+/*  
+ * Закрываем диалог только при нажатии  
+ * за его реальными границами.  
+ * Нажатие на внутренние отступы не закрывает окно.  
+ */  
+  
+elements.dialog.addEventListener("click",event => {  
+  if (event.target !== elements.dialog) {  
+    return;  
+  }  
+  
+  const rect = elements.dialog.getBoundingClientRect();  
+  
+  const clickedOutside =  
+    event.clientX < rect.left ||  
+    event.clientX > rect.right ||  
+    event.clientY < rect.top ||  
+    event.clientY > rect.bottom;  
+  
+  if (clickedOutside) {  
+    closeInfoDialog();  
+  }  
+});  
+  
+elements.dialog.addEventListener("cancel",event => {  
+  if (dialogFallbackMode) {  
+    event.preventDefault();  
+    closeInfoDialog();  
+  }  
+});  
+  
+/* SEARCH */  
+  
+elements.classSearch.addEventListener("input",event => {  
+  renderClasses(event.target.value);  
+});  
+  
+/* MOBILE MENU */  
+  
+function closeMobileMenu(returnFocus = false) {  
+  navigation.classList.remove("open");  
+  
+  menuToggle.setAttribute("aria-expanded","false");  
+  menuToggle.setAttribute("aria-label","Открыть меню");  
+  menuToggle.textContent = "☰";  
+  
+  if (returnFocus && window.innerWidth <= 760) {  
+    menuToggle.focus();  
+  }  
+}  
+  
+menuToggle.addEventListener("click",() => {  
+  const isOpen = navigation.classList.toggle("open");  
+  
+  menuToggle.setAttribute(  
+    "aria-expanded",  
+    String(isOpen)  
+  );  
+  
+  menuToggle.setAttribute(  
+    "aria-label",  
+    isOpen ? "Закрыть меню" : "Открыть меню"  
+  );  
+  
+  menuToggle.textContent = isOpen ? "✕" : "☰";  
+  
+  if (isOpen) {  
+    navigation.querySelector("button")?.focus();  
+  } else {  
+    menuToggle.focus();  
+  }  
+});  
+  
+// Закрытие при нажатии за пределами меню.  
+  
+document.addEventListener("pointerdown",event => {  
+  if (  
+    navigation.classList.contains("open") &&  
+    !navigation.contains(event.target) &&  
+    !menuToggle.contains(event.target)  
+  ) {  
+    closeMobileMenu();  
+  }  
+});  
+  
+// Закрытие по Escape, включая резервный режим диалога.  
+  
+document.addEventListener("keydown",event => {  
+  if (  
+    event.key === "Escape" &&  
+    navigation.classList.contains("open")  
+  ) {  
+    closeMobileMenu(true);  
+  }  
+  
+  // В старых браузерах Escape не закрывает dialog автоматически.  
+  if (  
+    event.key === "Escape" &&  
+    dialogFallbackMode &&  
+    elements.dialog.open  
+  ) {  
+    event.preventDefault();  
+    closeInfoDialog();  
+  }  
+});  
+  
+// Закрытие при переходе на широкую ширину экрана.  
+  
+window.addEventListener("resize",() => {  
+  if (window.innerWidth > 760) {  
+    closeMobileMenu();  
+  }  
+});  
+  
+/* NAVIGATION */  
+  
+navigation.addEventListener("click",event => {  
+  const button = event.target.closest(  
+    "button[data-section]"  
+  );  
+  
+  if (!button) {  
+    return;  
+  }  
+  
+  const menuWasOpen = navigation.classList.contains("open");  
+  
+  navigation.querySelectorAll("button").forEach(item => {  
+    item.classList.toggle("active",item === button);  
+  });  
+  
+  const section = button.dataset.section;  
+  
+  if (section === "home") {  
+    window.scrollTo({  
+      top:0,  
+      behavior:"smooth"  
+    });  
+  }  
+  
+  if (section === "about") {  
+    openInfo(  
+      "О проекте",  
+      "РАСПИСАНИЕ — самостоятельный интерфейс для удобного просмотра школьного расписания. Сейчас работает демонстрационная версия. Реальные данные будут подключены отдельно из разрешённого источника."  
+    );  
+  }  
+  
+  if (section === "help") {  
+    openInfo(  
+      "Помощь",  
+      "Выбери класс в блоке выбора класса, затем нажми на нужный день недели. Для поиска класса начни вводить его название в поле поиска. На телефоне уроки отображаются отдельными карточками."  
+    );  
+  }  
+  
+  closeMobileMenu();  
+  
+  // При переходе на главную возвращаем фокус на кнопку меню,  
+  // только если меню было открыто на мобильном устройстве.  
+  // При открытии диалога фокус остаётся внутри диалога.  
+  if (section === "home" && menuWasOpen) {  
+    menuToggle.focus();  
+  }  
+});  
+  
+/* FIRST START */  
+  
+renderClasses();  
+renderDays();  
+renderSchedule();  
+  
+</script> </body>  
+</html>
